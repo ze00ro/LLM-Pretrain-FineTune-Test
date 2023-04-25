@@ -3,7 +3,7 @@ import json
 from torch.utils.data import Dataset, random_split
 from transformers import AutoTokenizer, TrainingArguments, Trainer, AutoModelForCausalLM
 
-model_name = "/llm/models/llama_hf"
+model_name = "/llm/models/llama_7b_hf"
 dataset = "./dataset/xbtqyj.txt"
 
 torch.manual_seed(42)
