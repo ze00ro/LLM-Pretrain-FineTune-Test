@@ -3,7 +3,7 @@ import json
 from torch.utils.data import Dataset, random_split
 from transformers import LlamaTokenizer, TrainingArguments, Trainer, LlamaForCausalLM
 
-model_name = "/llm/models/llama_7b_hf"
+model_name = "/llm/models/chatglm-6b"
 dataset = "./dataset/xbtqyj.txt"
 
 torch.manual_seed(42)
@@ -11,7 +11,7 @@ torch.manual_seed(42)
 tokenizer = LlamaTokenizer.from_pretrained(model_name)
 print(tokenizer.pad_token_id)
 print(tokenizer)
-training_args = TrainingArguments(output_dir='./results',
+training_args = TrainingArguments(output_dir='./fulltune-models',
                                   num_train_epochs=2.2,
                                   logging_steps=100,
                                   learning_rate=1e-5,
