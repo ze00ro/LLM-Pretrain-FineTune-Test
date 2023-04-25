@@ -1,17 +1,17 @@
 import torch
 import json
 from torch.utils.data import Dataset, random_split
-from transformers import LlamaTokenizer, TrainingArguments, Trainer, LlamaForCausalLM
+from transformers import AutoTokenizer, TrainingArguments, Trainer, AutoModelForCausalLM
 
-model_name = "/llm/models/llama_7b_hf"
+model_name = "/llm/models/chatglm-6b"
 dataset = "./dataset/xbtqyj.txt"
 
 torch.manual_seed(42)
 
-tokenizer = LlamaTokenizer.from_pretrained(model_name)
+tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
 print(tokenizer.pad_token_id)
 print(tokenizer)
-training_args = TrainingArguments(output_dir='./results',
+training_args = TrainingArguments(output_dir='./fulltune-models',
                                   num_train_epochs=2.2,
                                   logging_steps=100,
                                   learning_rate=1e-5,
@@ -27,7 +27,7 @@ training_args = TrainingArguments(output_dir='./results',
                                   gradient_checkpointing=True,
                                   # deepspeed='./ds_config.json'
                                   )
-model = LlamaForCausalLM.from_pretrained(model_name).cuda()
+model = AutoModelForCausalLM.from_pretrained(model_name, trust_remote_code=True).cuda()
 print("load model done")
 
 # model.resize_token_embeddings(len(tokenizer))
