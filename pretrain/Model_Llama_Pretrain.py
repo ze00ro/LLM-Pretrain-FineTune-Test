@@ -27,7 +27,7 @@ training_args = TrainingArguments(output_dir='./results',
                                   gradient_checkpointing=True,
                                   # deepspeed='./ds_config.json'
                                   )
-model = AutoModelForCausalLM.from_pretrained(model_name, use_cache=False).cuda()
+model = AutoModelForCausalLM.from_pretrained(model_name).cuda()
 
 
 # model.resize_token_embeddings(len(tokenizer))
