@@ -1,14 +1,14 @@
 import torch
 import json
 from torch.utils.data import Dataset, random_split
-from transformers import AutoTokenizer, TrainingArguments, Trainer, AutoModelForCausalLM
+from transformers import LlamaTokenizer, TrainingArguments, Trainer, LlamaForCausalLM
 
 model_name = "/llm/models/llama_7b_hf"
 dataset = "./dataset/xbtqyj.txt"
 
 torch.manual_seed(42)
 
-tokenizer = AutoTokenizer.from_pretrained(model_name)
+tokenizer = LlamaTokenizer.from_pretrained(model_name)
 print(tokenizer.pad_token_id)
 print(tokenizer)
 training_args = TrainingArguments(output_dir='./results',
@@ -27,8 +27,8 @@ training_args = TrainingArguments(output_dir='./results',
                                   gradient_checkpointing=True,
                                   # deepspeed='./ds_config.json'
                                   )
-model = AutoModelForCausalLM.from_pretrained(model_name).cuda()
-
+model = LlamaForCausalLM.from_pretrained(model_name).cuda()
+print("load model done")
 
 # model.resize_token_embeddings(len(tokenizer))
 
