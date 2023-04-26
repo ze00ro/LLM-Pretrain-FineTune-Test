@@ -18,8 +18,8 @@ training_args = TrainingArguments(output_dir='./results',
                                   save_strategy='steps',
                                   save_steps=1000,
                                   evaluation_strategy='epoch',
-                                  per_device_train_batch_size=2,
-                                  per_device_eval_batch_size=2,
+                                  per_device_train_batch_size=1,
+                                  per_device_eval_batch_size=1,
                                   lr_scheduler_type="cosine",
                                   warmup_steps=50,
                                   weight_decay=0.01,
@@ -99,4 +99,6 @@ trainer = Mytrainer(model=model,
                     )
 trainer.train()
 trainer.save_model()
+
+
 
